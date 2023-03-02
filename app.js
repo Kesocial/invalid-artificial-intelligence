@@ -22,9 +22,9 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 }); 
-client.on("error"),async(error)=>{
+client.on("error",async(error)=>{
 	console.log(error)
-}
+})
 client.on('interactionCreate', async (interaction) => {
 	if (!interaction.isChatInputCommand()) return; 
 	if (interaction.commandName="test") {
