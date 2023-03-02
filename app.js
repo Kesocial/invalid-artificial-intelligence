@@ -41,6 +41,7 @@ client.on("error",async(error)=>{
 	console.log(error)
 })
 client.on('interactionCreate', async (interaction) => {
+	if (!interaction.isChatInputCommand()) return; 
 	if (interaction.commandName="test") {
 		await interaction.reply('Hello World!');
 	}
