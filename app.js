@@ -48,6 +48,7 @@ client.on("error",async(error)=>{
 	console.log(error)
 })
 client.on('interactionCreate', async (interaction) => {
+	console.log("Interaccion")
   if (!interaction.isCommand()) return; // Ignore non-command interactions
 
   const { commandName } = interaction;
