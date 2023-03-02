@@ -13,7 +13,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 	try {
 		console.log('Started refreshing application (/) commands.');
 
-		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: COMMANDS});
+		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: Object.keys(COMMANDS).map(key=>COMMANDS[key])});
 
 		console.log('Successfully reloaded application (/) commands.');
 	} catch (error) {
@@ -29,7 +29,7 @@ client.on('ready', () => {
 }); 
 client.on('interactionCreate', async (interaction) => {
 	if (!interaction.isChatInputCommand()) return; 
-	const command = COMMANDS[interaction.commandName]
+	const command = COMMANDS.find()
 	console.log(command)
 	if (command) await command.execute(interaction) 
 });
