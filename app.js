@@ -21,15 +21,19 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
-	client.guilds.cache.forEach(async (guild) => {
-		const commands = await guild.commands.fetch();
-		console.log(`Refreshed ${commands.size} commands for guild ${guild.name}`);
-	});
 }); 
 
 client.on('interactionCreate', async (interaction) => {
 	if (!interaction.isChatInputCommand()) return; 
-	if (COMMANDS[interaction.commandName]) await COMMANDS[interaction.commandName].do()
+	if (interaction.commandName="test") {
+		await interaction.reply('Hello World!');
+	}
+	if (interaction.commandName="ping") {
+		await interaction.reply('Pong!');
+	}
+	if (interaction.commandName="play") {
+		await interaction.reply('Coming Soon!');
+	}
 });
 
 client.login(process.env.TOKEN);
