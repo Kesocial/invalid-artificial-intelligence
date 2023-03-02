@@ -29,7 +29,7 @@ client.on('ready', () => {
 }); 
 client.on('interactionCreate', async (interaction) => {
 	if (!interaction.isChatInputCommand()) return; 
-	const command = COMMANDS.find()
+	const command = COMMANDS[interaction.commandName]
 	console.log(command)
 	if (command) await command.execute(interaction) 
 });
