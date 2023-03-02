@@ -22,9 +22,12 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 }); 
+client.guilds.cache.forEach(async (guild) => {
+  const commands = await guild.commands.fetch();
+  console.log(`Refreshed ${commands.size} commands for guild ${guild.name}`);
+});
 client.on('interactionCreate', async (interaction) => {
-	if (!interaction.isChatInputCommand()) return;
-	client.sweepers.sweepApplicationCommands()
+	if (!interaction.isChatInputCommand()) return; 
 	if (COMMANDS[interaction.commandName]) await COMMANDS[interaction.commandName].do()
 });
 
