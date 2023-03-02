@@ -1,5 +1,5 @@
 import 'dotenv/config';
-const { REST, Routes } = require('discord.js');
+import { REST, Routes } from 'discord.js'
 const commands = [
 	{
 		name: 'ping',
@@ -21,7 +21,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 	}
 })();
  
-const { Client, GatewayIntentBits } = require('discord.js');
+import { Client, GatewayIntentBits } from 'discord.js'
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.on('ready', () => {
