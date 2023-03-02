@@ -1,9 +1,14 @@
 import 'dotenv/config';
 import { REST, Routes } from 'discord.js'
 import { COMMANDS } from './commands.js';
+import {readDirectory} from "./utils.js"
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
-
+// readDirectory(path,()=>{
+	 
+// })
 (async () => {
 	try {
 		console.log('Started refreshing application (/) commands.');
@@ -24,15 +29,9 @@ client.on('ready', () => {
 }); 
 client.on('interactionCreate', async (interaction) => {
 	if (!interaction.isChatInputCommand()) return; 
-	if (interaction.commandName="test") {
-		await interaction.reply('Hello World!');
-	}
-	if (interaction.commandName="ping") {
-		await interaction.reply('Pong!');
-	}
-	if (interaction.commandName="play") {
-		await interaction.reply('Coming Soon!');
-	}
+	const command = COMMANDS[interaction.commandName]
+	console.log(command)
+	if (command) await command.execute(interaction) 
 });
 
 client.login(process.env.TOKEN);
