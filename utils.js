@@ -1,6 +1,3 @@
-import 'dotenv/config';
-import { readdir } from 'fs/promises';
-
 // Simple method that returns a random emoji from list
 export function getRandomEmoji() {
   const emojiList = ['😭','😄','😌','🤓','😎','😤','🤖','😶‍🌫️','🌏','📸','💿','👋','🌊','✨'];
@@ -11,11 +8,18 @@ export function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export async function readDirectory(path,cb) {
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+export function getActualDirectory(){
+  return dirname(fileURLToPath(import.meta.url))
+}
+
+import { readdir } from 'fs/promises';
+export async function readDirectory(path) {
   try {
     const files = await readdir(path);
     console.log(files);
-    if(!cb)cb()
+    return files
   } catch (err) {
     console.error(err);
   }

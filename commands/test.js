@@ -1,13 +1,11 @@
-import { capitalize } from './utils.js';
+import { capitalize } from '../utils.js';
 
 const execute = async (interaction)=>{
   await interaction.reply('Hello World!');
-}
-// Simple test command
-export const test = [
-  {
-    name: 'play',
-    description: 'For play music!2',
+} 
+export const command = {
+    name: 'test',
+    description: 'Command for test your app',
     execute
-  }
-];
+}
+

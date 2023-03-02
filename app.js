@@ -1,19 +1,28 @@
 import 'dotenv/config';
 import { REST, Routes } from 'discord.js'
 import { COMMANDS } from './commands.js';
-import {readDirectory} from "./utils.js"
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { readDirectory,getActualDirectory } from './utils.js';
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
-// readDirectory(path,()=>{
-	 
-// })
+
+
+
+
 (async () => {
+
+	const fileNames = await readDirectory(`${getActualDirectory()}/commands`);
+	console.log(fileNames)
+	const COMMANDS2= []
+	for(let name in fileNames) {
+		const {command} = await import(`./commands/${fileNames[name]}`)
+		COMMANDS2.push(command)
+	};
+	console.log(COMMANDS2)
+
 	try {
 		console.log('Started refreshing application (/) commands.');
 
-		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: Object.keys(COMMANDS).map(key=>COMMANDS[key])});
+		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: COMMANDS2});
 
 		console.log('Successfully reloaded application (/) commands.');
 	} catch (error) {
