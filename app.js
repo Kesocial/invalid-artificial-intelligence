@@ -1,11 +1,6 @@
 import 'dotenv/config';
 import { REST, Routes } from 'discord.js'
-const commands = [
-	{
-		name: 'ping',
-		description: 'Replies with Pong!',
-	},
-];
+import { COMMANDS } from './commands.js';
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
@@ -13,7 +8,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 	try {
 		console.log('Started refreshing application (/) commands.');
 
-		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: commands });
+		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: Object.keys(COMMANDS).map((key) =>COMMANDS[key])  });
 
 		console.log('Successfully reloaded application (/) commands.');
 	} catch (error) {
@@ -30,10 +25,7 @@ client.on('ready', () => {
 
 client.on('interactionCreate', async (interaction) => {
 	if (!interaction.isChatInputCommand()) return;
-
-	if (interaction.commandName === 'ping') {
-		await interaction.reply('Pong!');
-	}
+	if (COMMANDS[interaction.commandName]) await COMMANDS[interaction.commandName].do()
 });
 
 client.login(process.env.TOKEN);
