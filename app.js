@@ -5,16 +5,23 @@ const commands = [
   {
     name: 'test',
     description: 'Say hi to your app2!',
+		execute:(message, args)=>{
+			message.reply(`¡Hola ${message.author} welcome to the World!`);
+		}
   },
   {
     name: 'ping',
     description: 'Replies with Pong2!',
-   
+		execute:(message, args)=>{
+			message.reply(`Pong! to ${message.author}!`);
+		}
   },
   {
     name: 'play',
     description: 'For play music!2',
-   
+		execute:(message, args)=>{
+			message.reply(`Coming Soon!`);
+		}
   }
 ];
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
@@ -41,16 +48,23 @@ client.on("error",async(error)=>{
 	console.log(error)
 })
 client.on('interactionCreate', async (interaction) => {
-	if (!interaction.isChatInputCommand()) return; 
-	if (interaction.commandName="test") {
-		await interaction.reply('Hello World!');
-	}
-	if (interaction.commandName="ping") {
-		await interaction.reply('Pong!');
-	}
-	if (interaction.commandName="play") {
-		await interaction.reply('Coming Soon!');
-	}
+  if (!interaction.isCommand()) return; // Ignore non-command interactions
+
+  const { commandName } = interaction;
+  const command = client.commands.get(commandName);
+
+  if (!command) return; // Ignore unknown commands
+
+  try {
+    await command.execute(interaction);
+  } catch (error) {
+    console.error('An error occurred:', error);
+    await interaction.reply({
+      content: 'An error occurred while executing this command.',
+      ephemeral: true // Only visible to the user who executed the command
+    });
+  }
 });
+
 
 client.login(process.env.TOKEN);
