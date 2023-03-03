@@ -20,11 +20,11 @@ const execute = async (interaction)=>{
   console.log({resource})
   player.play(resource);
   connection.subscribe(player);
-
+  interaction.guild.me.voice.setRequestToSpeak(true);
   player.on(AudioPlayerStatus.Playing, async() => {
     console.log('The audio player has started playing!');
     console.log("-------------------------------------")
-    console.log({resource})
+    console.log(resource.audioPlayer)
     await interaction.reply('Playing Music!');
   });
   
