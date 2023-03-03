@@ -1,4 +1,6 @@
 import { joinVoiceChannel, createAudioPlayer, createAudioResource } from "@discordjs/voice"
+import Ffmpeg from 'ffmpeg-static'
+
 const execute = async (interaction)=>{
   const channel = interaction.member.voice.channel
   joinVoiceChannel({
@@ -7,7 +9,12 @@ const execute = async (interaction)=>{
     adapterCreator:channel.guild.voiceAdapterCreator
   })
   const player = createAudioPlayer();
-  const resource = createAudioResource('../audiofile.mp3');
+  const resource = createAudioResource('../audiofile.mp3',{
+    inlineVolume: true,
+    inputType: 'ffmpeg',
+    ffmpegArgs: [`-ss ${startTime}`, '-t 30'],
+    ffmpegPath: Ffmpeg.path
+  });
   player.play(resource);
   connection.subscribe(player);
   await interaction.reply('Playing Music!');
