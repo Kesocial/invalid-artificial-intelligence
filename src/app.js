@@ -11,9 +11,11 @@ let COMMANDS_MAP= {};
 	const fileNames = await readDirectory({path:`${getActualDirectory()}/commands`,options:{withFileTypes:false}}); 
 	console.log({fileNames})
 	for(let name in fileNames) {
-		const {command} = await import(`./commands/${fileNames[name]}`)
-		COMMANDS.push(command)
-		COMMANDS_MAP = {...COMMANDS_MAP, [command.name]:command }
+		if(fileNames[name].split(".")[1]==="js") {
+			const {command} = await import(`./commands/${fileNames[name]}`)
+			COMMANDS.push(command)
+			COMMANDS_MAP = {...COMMANDS_MAP, [command.name]:command }
+		}
 	};
 	// console.log(COMMANDS)
 	// console.log(COMMANDS_MAP)
