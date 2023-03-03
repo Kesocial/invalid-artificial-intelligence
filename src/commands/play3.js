@@ -15,7 +15,7 @@ const execute = async (interaction)=>{
     adapterCreator:channel.guild.voiceAdapterCreator
   })
   const player = createAudioPlayer();
-  let resource = createAudioResource(join(getActualDirectory(), 'file.mp3'));
+  let resource = createAudioResource(getActualDirectory() + '/file.mp3');
   console.log({resource})
   player.play(resource);
   connection.subscribe(player);
