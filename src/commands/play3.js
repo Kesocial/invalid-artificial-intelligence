@@ -1,5 +1,5 @@
 import { joinVoiceChannel, createAudioPlayer, createAudioResource, StreamType } from "@discordjs/voice"
-const { join } = require('node:path');
+import { join } from'node:path'
 
 const execute = async (interaction)=>{
   const channel = interaction.member.voice.channel
