@@ -4,7 +4,6 @@ import {
   createAudioPlayer, 
   createAudioResource 
 } from "@discordjs/voice"
-import { join } from'node:path'
 import {getActualDirectory} from "../utils.js"
  
 const execute = async (interaction)=>{
@@ -16,15 +15,11 @@ const execute = async (interaction)=>{
   })
   const player = createAudioPlayer();
   let resource = createAudioResource(getActualDirectory() + '/file.mp3', { inlineVolume: true });
-  resource.volume.setVolume(0.5);
   console.log({resource})
-  player.play(resource);
   connection.subscribe(player);
-  interaction.guild.me.voice.setRequestToSpeak(true);
   player.on(AudioPlayerStatus.Playing, async() => {
     console.log('The audio player has started playing!');
     console.log("-------------------------------------")
-    console.log(resource.audioPlayer)
     await interaction.reply('Playing Music!');
   });
   
