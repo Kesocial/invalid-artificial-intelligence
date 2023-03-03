@@ -4,6 +4,7 @@ import { readDirectory,getActualDirectory } from './utils.js';
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 const COMMANDS= [];
+const COMMANDS_MAP= [];
 
 (async () => {
 
@@ -11,9 +12,11 @@ const COMMANDS= [];
 	console.log({fileNames})
 	for(let name in fileNames) {
 		const {command} = await import(`./commands/${fileNames[name]}`)
-		COMMANDS.push({[command.name]:command})
+		COMMANDS.push(command)
+		COMMANDS_MAP.push({[command.name]:command})
 	};
 	console.log(COMMANDS)
+	console.log(COMMANDS_MAP)
 	try {
 		console.log('Started refreshing application (/) commands.');
 
@@ -33,9 +36,9 @@ client.on('ready', () => {
 }); 
 client.on('interactionCreate', async (interaction) => {
 	if (!interaction.isChatInputCommand()) return; 
-	const command = COMMANDS[interaction.commandName]
+	const command = COMMANDS_MAP[interaction.commandName]
 	console.log({command})
-	console.log(COMMANDS)
+	console.log(COMMANDS_MAP)
 	if (command) await command.execute(interaction) 
 });
 

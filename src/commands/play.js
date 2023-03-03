@@ -10,8 +10,8 @@ const execute = async (interaction)=>{
 }
 // Simple test command
 export const command = {
-    name: 'play',
-    description: 'For play music!2',
+    name: 'play3',
+    description: 'For play music!3',
     execute
 }
 
