@@ -1,6 +1,6 @@
 import { joinVoiceChannel, createAudioPlayer, createAudioResource, StreamType } from "@discordjs/voice"
 import { join } from'node:path'
-
+import {getActualDirectory} from "../utils.js"
 const execute = async (interaction)=>{
   const channel = interaction.member.voice.channel
   const connection = joinVoiceChannel({
@@ -9,7 +9,7 @@ const execute = async (interaction)=>{
     adapterCreator:channel.guild.voiceAdapterCreator
   })
   const player = createAudioPlayer();
-  let resource = createAudioResource(join(__dirname, 'file.mp3'));
+  let resource = createAudioResource(join(getActualDirectory(), 'file.mp3'));
   player.play(resource);
   connection.subscribe(player);
   await interaction.reply('Playing Music!');
