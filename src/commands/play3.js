@@ -16,6 +16,7 @@ const execute = async (interaction)=>{
   })
   const player = createAudioPlayer();
   let resource = createAudioResource(getActualDirectory() + '/file.mp3');
+  resource.volume.setVolume(0.5);
   console.log({resource})
   player.play(resource);
   connection.subscribe(player);
