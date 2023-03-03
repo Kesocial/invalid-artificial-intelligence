@@ -22,6 +22,8 @@ const execute = async (interaction)=>{
 
   player.on(AudioPlayerStatus.Playing, async() => {
     console.log('The audio player has started playing!');
+    console.log("-------------------------------------")
+    console.log({resource})
     await interaction.reply('Playing Music!');
   });
   
