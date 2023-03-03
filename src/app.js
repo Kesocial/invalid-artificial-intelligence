@@ -9,7 +9,7 @@ let COMMANDS_MAP= {};
 (async () => {
 
 	const fileNames = await readDirectory({path:`${getActualDirectory()}/commands`,options:{withFileTypes:false}}); 
-	console.log({fileNames})
+	// console.log({fileNames})
 	for(let name in fileNames) {
 		if(fileNames[name].split(".")[1]==="js") {
 			const {command} = await import(`./commands/${fileNames[name]}`)
@@ -38,7 +38,7 @@ client.on('ready', () => {
 }); 
 client.on('interactionCreate', async (interaction) => {
 	if (!interaction.isChatInputCommand()) return; 
-	console.log({interaction})
+	// console.log({interaction})
 	const command = COMMANDS_MAP[interaction.commandName]
 	// console.log({command})
 	// console.log(COMMANDS_MAP)
