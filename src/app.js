@@ -12,11 +12,11 @@ let COMMANDS_MAP= {};
 	console.log({fileNames})
 	for(let name in fileNames) {
 		const {command} = await import(`./commands/${fileNames[name]}`)
-		COMMANDS.push(command)
+		// COMMANDS.push(command)
 		COMMANDS_MAP = {...COMMANDS_MAP, [command.name]:command }
 	};
-	console.log(COMMANDS)
-	console.log(COMMANDS_MAP)
+	// console.log(COMMANDS)
+	// console.log(COMMANDS_MAP)
 	try {
 		console.log('Started refreshing application (/) commands.');
 
@@ -38,8 +38,8 @@ client.on('interactionCreate', async (interaction) => {
 	if (!interaction.isChatInputCommand()) return; 
 	console.log({interaction})
 	const command = COMMANDS_MAP[interaction.commandName]
-	console.log({command})
-	console.log(COMMANDS_MAP)
+	// console.log({command})
+	// console.log(COMMANDS_MAP)
 	if (command) await command.execute(interaction) 
 });
 
