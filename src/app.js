@@ -12,7 +12,7 @@ let COMMANDS_MAP= {};
 	console.log({fileNames})
 	for(let name in fileNames) {
 		const {command} = await import(`./commands/${fileNames[name]}`)
-		// COMMANDS.push(command)
+		COMMANDS.push(command)
 		COMMANDS_MAP = {...COMMANDS_MAP, [command.name]:command }
 	};
 	// console.log(COMMANDS)
