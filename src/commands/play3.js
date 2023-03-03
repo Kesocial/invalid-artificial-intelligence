@@ -16,7 +16,7 @@ const execute = async (interaction)=>{
   })
   const player = createAudioPlayer();
   let resource = createAudioResource(join(getActualDirectory(), 'file.mp3'));
-  player.play(resource);
+  // player.play(resource);
   connection.subscribe(player);
 
   player.on(AudioPlayerStatus.Playing, async() => {
