@@ -28,7 +28,6 @@ const execute = async (interaction)=>{
   player.on('error', async error => {
     console.error(`Error: ${error.message} with resource ${error.resource.metadata.title}`);
     // player.play(getNextResource());
-    await interaction.reply('Error with resource music!');
   });
 console.log(generateDependencyReport())
 }
