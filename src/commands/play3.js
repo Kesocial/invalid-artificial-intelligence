@@ -12,7 +12,7 @@ const execute = async (interaction)=>{
   const resource = createAudioResource('../audiofile.mp3',{
     inlineVolume: true,
     inputType: 'ffmpeg',
-    ffmpegArgs: [`-ss ${startTime}`, '-t 30'],
+    ffmpegArgs: [`-ss ${0}`, '-t 30'],
     ffmpegPath: Ffmpeg.path
   });
   player.play(resource);
