@@ -2,7 +2,8 @@ import {
   AudioPlayerStatus,
   joinVoiceChannel, 
   createAudioPlayer, 
-  createAudioResource 
+  createAudioResource,
+  generateDependencyReport 
 } from "@discordjs/voice"
 import {getActualDirectory} from "../utils.js"
  
@@ -29,7 +30,7 @@ const execute = async (interaction)=>{
     // player.play(getNextResource());
     await interaction.reply('Error with resource music!');
   });
-
+console.log(generateDependencyReport())
 }
 // Simple test command
 export const command = {
