@@ -10,7 +10,6 @@ const execute = async (interaction)=>{
   const resource = createAudioResource('../audiofile.mp3');
   player.play(resource);
   connection.subscribe(player);
-  console.log(`Connected to ${member.voice.channel.name} and playing audio file`);
   await interaction.reply('Playing Music!');
 }
 // Simple test command
