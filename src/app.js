@@ -29,7 +29,7 @@ let COMMANDS_MAP= {};
 })();
  
 import { Client, GatewayIntentBits } from 'discord.js'
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds,Discord.Intents.FLAGS.GUILD_VOICE_STATES,] });
 
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
