@@ -3,7 +3,7 @@ import Ffmpeg from 'ffmpeg-static'
 
 const execute = async (interaction)=>{
   const channel = interaction.member.voice.channel
-  joinVoiceChannel({
+  const connection = joinVoiceChannel({
     channelId:channel.id,
     guildId:channel.guild.id,
     adapterCreator:channel.guild.voiceAdapterCreator
