@@ -4,7 +4,7 @@ import { readDirectory,getActualDirectory } from './utils.js';
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 const COMMANDS= [];
-const COMMANDS_MAP= [];
+let COMMANDS_MAP= {};
 
 (async () => {
 
@@ -13,7 +13,7 @@ const COMMANDS_MAP= [];
 	for(let name in fileNames) {
 		const {command} = await import(`./commands/${fileNames[name]}`)
 		COMMANDS.push(command)
-		COMMANDS_MAP.push({[command.name]:command})
+		COMMANDS_MAP = {...COMMANDS_MAP, [command.name]:command }
 	};
 	console.log(COMMANDS)
 	console.log(COMMANDS_MAP)
