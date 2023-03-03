@@ -15,10 +15,9 @@ export function getActualDirectory(){
 }
 
 import { readdir } from 'fs/promises';
-export async function readDirectory(path) {
+export async function readDirectory({path,options}) {
   try {
-    const files = await readdir(path);
-    console.log(files);
+    const files = await readdir(path,options);
     return files
   } catch (err) {
     console.error(err);

@@ -1,28 +1,23 @@
-import 'dotenv/config';
 import { REST, Routes } from 'discord.js'
-import { COMMANDS } from './commands.js';
+import 'dotenv/config';
 import { readDirectory,getActualDirectory } from './utils.js';
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
-
-
-
+const COMMANDS= [];
 
 (async () => {
 
-	const fileNames = await readDirectory(`${getActualDirectory()}/commands`);
-	console.log(fileNames)
-	const COMMANDS2= []
+	const fileNames = await readDirectory({path:`${getActualDirectory()}/commands`,options:{withFileTypes:false}}); 
+	console.log({fileNames})
 	for(let name in fileNames) {
 		const {command} = await import(`./commands/${fileNames[name]}`)
-		COMMANDS2.push(command)
+		COMMANDS.push({[command.name]:command})
 	};
-	console.log(COMMANDS2)
-
+	console.log(COMMANDS)
 	try {
 		console.log('Started refreshing application (/) commands.');
 
-		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: COMMANDS2});
+		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: COMMANDS});
 
 		console.log('Successfully reloaded application (/) commands.');
 	} catch (error) {
@@ -39,7 +34,8 @@ client.on('ready', () => {
 client.on('interactionCreate', async (interaction) => {
 	if (!interaction.isChatInputCommand()) return; 
 	const command = COMMANDS[interaction.commandName]
-	console.log(command)
+	console.log({command})
+	console.log(COMMANDS)
 	if (command) await command.execute(interaction) 
 });
 

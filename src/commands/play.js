@@ -1,0 +1,17 @@
+import {joinVoiceChannel} from "@discordjs/voice"
+const execute = async (interaction)=>{
+  console.log(interaction)
+  // joinVoiceChannel({
+  //   channelId:channel.id,
+  //   guildId:channel.guild.id,
+  //   adapterCreator:channel.guild.voiceAdapterCreator
+  // })
+  await interaction.reply('Coming Soon!');
+}
+// Simple test command
+export const command = {
+    name: 'play',
+    description: 'For play music!2',
+    execute
+}
+
