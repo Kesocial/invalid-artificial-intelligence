@@ -36,7 +36,7 @@ client.on('ready', () => {
 }); 
 client.on('interactionCreate', async (interaction) => {
 	if (!interaction.isChatInputCommand()) return; 
-	console.log(interaction)
+	console.log({interaction})
 	const command = COMMANDS_MAP[interaction.commandName]
 	console.log({command})
 	console.log(COMMANDS_MAP)
