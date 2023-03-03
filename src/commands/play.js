@@ -1,6 +1,8 @@
 import {joinVoiceChannel} from "@discordjs/voice"
 const execute = async (interaction)=>{
-  console.log(interaction)
+  console.log({channelid:interaction.channelId})
+  console.log({guildid:interaction.guildId})
+  console.log({vcStates:interaction.voiceStates})
   // joinVoiceChannel({
   //   channelId:channel.id,
   //   guildId:channel.guild.id,
