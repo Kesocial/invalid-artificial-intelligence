@@ -6,8 +6,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 const COMMANDS= [];
 let COMMANDS_MAP= {};
 
-(async () => {
-
+(async () => { 
 	const fileNames = await readDirectory({path:`${getActualDirectory()}/commands`,options:{withFileTypes:false}}); 
 	// console.log({fileNames})
 	for(let name in fileNames) {
@@ -20,10 +19,8 @@ let COMMANDS_MAP= {};
 	// console.log(COMMANDS)
 	// console.log(COMMANDS_MAP)
 	try {
-		console.log('Started refreshing application (/) commands.');
-
-		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: COMMANDS});
-
+		console.log('Started refreshing application (/) commands.'); 
+		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: COMMANDS}); 
 		console.log('Successfully reloaded application (/) commands.');
 	} catch (error) {
 		console.error(error);
