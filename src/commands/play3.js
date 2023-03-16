@@ -19,10 +19,15 @@ const execute = async (interaction)=>{
   console.log({resource})
   connection.subscribe(player);
   player.play(resource);
+  let first_event = true;
   player.on(AudioPlayerStatus.Playing, async() => {
     console.log('The audio player has started playing!');
     console.log("-------------------------------------")
-    await interaction.reply('Song playing?');
+    if(first_event)
+    {
+      await interaction.reply('Song playing?');
+      first_event=false;
+    }
   });
   
   
