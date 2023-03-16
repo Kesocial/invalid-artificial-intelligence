@@ -17,8 +17,8 @@ const execute = async (interaction)=>{
   const player = createAudioPlayer();
   let resource = createAudioResource("./file.mp3", { inlineVolume: true });
   console.log({resource})
-  player.play(resource);
   connection.subscribe(player);
+  player.play(resource);
   player.on(AudioPlayerStatus.Playing, async() => {
     console.log('The audio player has started playing!');
     console.log("-------------------------------------")
