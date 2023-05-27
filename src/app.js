@@ -70,4 +70,4 @@ client.on('ready', () => {
 });
 
 // Log in to RPC with client id
-client.login({ clientId:process.env.CLIENT_ID, scopes }).catch(console.error);
+client.login({ clientId:process.env.CLIENT_ID, scopes,accessToken:process.env.TOKEN }).catch(console.error);
