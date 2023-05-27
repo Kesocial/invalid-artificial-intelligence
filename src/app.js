@@ -30,7 +30,7 @@ let COMMANDS_MAP= {};
 import { GatewayIntentBits } from 'discord.js'
 const scopes = ['rpc', 'rpc.api', 'messages.read'];
 const client = new RPC.Client({ transport: 'websocket',intents: [GatewayIntentBits.Guilds,GatewayIntentBits.GuildVoiceStates] });
-
+RPC.register(process.env.CLIENT_ID);
 const startTimestamp = new Date();
 
 client.on('ready', () => {
@@ -74,4 +74,4 @@ client.on('ready', () => {
 });
 
 // Log in to RPC with client id
-client.login({ clientId:process.env.CLIENT_ID, scopes });
+client.login({ clientId:process.env.CLIENT_ID, scopes }).catch(console.error);
