@@ -48,11 +48,11 @@ async function setActivity() {
   if (!client)  return;
    
 	client.setActivity({
-    details: `y solo`,
-    state: 'Triste',
+    details: `Triste`,
+    state: 'y solo',
     startTimestamp,
-    largeImageKey: 'UwU',
-    largeImageText: 'UwU fufu ',
+    largeImageKey: 'catcute',
+    largeImageText: 'UwU',
     smallImageKey: 'catcute',
     smallImageText: 'Fufu',
     instance: false,
