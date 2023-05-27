@@ -2,7 +2,9 @@ import { REST, Routes } from 'discord.js'
 import 'dotenv/config';
 import { readDirectory,getActualDirectory } from './utils.js';
 import RPC from 'discord-rpc';
+import { GatewayIntentBits } from 'discord.js'
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
+const scopes = ['rpc', 'rpc.api', 'messages.read'];
 const COMMANDS= [];
 let COMMANDS_MAP= {};
 
@@ -27,11 +29,8 @@ let COMMANDS_MAP= {};
 	}
 })();
  
-import { GatewayIntentBits } from 'discord.js'
-const scopes = ['rpc', 'rpc.api', 'messages.read'];
 const client = new RPC.Client({ transport: 'websocket',intents: [GatewayIntentBits.Guilds,GatewayIntentBits.GuildVoiceStates] });
 RPC.register(process.env.CLIENT_ID);
-const startTimestamp = new Date();
 
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
@@ -50,7 +49,7 @@ async function setActivity() {
 	client.setActivity({
     details: `Triste`,
     state: 'y solo',
-    startTimestamp,
+    startTimestamp:new Date(),
     largeImageKey: 'catcute',
     largeImageText: 'UwU',
     smallImageKey: 'catcute',
@@ -59,13 +58,10 @@ async function setActivity() {
   });
 }
 
-
-
 client.on('ready', () => {
   console.log('Logged in as', client.application.name);
   console.log('Authed for user', client.user.username);
 
-  client.selectVoiceChannel('773110569435660328');
 	setActivity();
 
   setInterval(() => {
