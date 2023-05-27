@@ -29,7 +29,7 @@ let COMMANDS_MAP= {};
 	}
 })();
  
-const client = new RPC.Client({ transport: 'websocket',intents: [GatewayIntentBits.Guilds,GatewayIntentBits.GuildVoiceStates] });
+const client = new RPC.Client({ transport: 'ipc',intents: [GatewayIntentBits.Guilds,GatewayIntentBits.GuildVoiceStates] });
 RPC.register(process.env.CLIENT_ID);
 
 client.on('ready', () => {
