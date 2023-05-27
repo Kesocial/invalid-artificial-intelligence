@@ -1,7 +1,7 @@
 import { REST, Routes } from 'discord.js'
 import 'dotenv/config';
 import { readDirectory,getActualDirectory } from './utils.js';
-
+import RPCClient from 'discord-rpc/src/client.js';
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 const COMMANDS= [];
 let COMMANDS_MAP= {};
@@ -27,8 +27,10 @@ let COMMANDS_MAP= {};
 	}
 })();
  
-import { Client, GatewayIntentBits } from 'discord.js'
-const client = new Client({ intents: [GatewayIntentBits.Guilds,GatewayIntentBits.GuildVoiceStates] });
+import { GatewayIntentBits } from 'discord.js'
+const scopes = ['rpc', 'rpc.api', 'messages.read'];
+const client = new RPCClient({ transport: 'websocket',intents: [GatewayIntentBits.Guilds,GatewayIntentBits.GuildVoiceStates] });
+
 
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
@@ -42,4 +44,13 @@ client.on('interactionCreate', async (interaction) => {
 	if (command) await command.execute(interaction) 
 });
 
-client.login(process.env.TOKEN);
+
+client.on('ready', () => {
+  console.log('Logged in as', client.application.name);
+  console.log('Authed for user', client.user.username);
+
+  client.selectVoiceChannel('773110569435660328');
+});
+
+// Log in to RPC with client id
+client.login({ clientId:process.env.CLIENT_ID, scopes });
