@@ -5,7 +5,6 @@ import {
   createAudioResource,
   generateDependencyReport 
 } from "@discordjs/voice"
-import {getActualDirectory} from "../utils.js"
  
 const execute = async (interaction)=>{
   const channel = interaction.member.voice.channel

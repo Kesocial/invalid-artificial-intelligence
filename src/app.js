@@ -1,8 +1,8 @@
-import { REST, Routes } from 'discord.js'
+import { REST, Routes,GatewayIntentBits } from 'discord.js'
 import 'dotenv/config';
 import { readDirectory,getActualDirectory } from './utils.js';
-import RPC from 'discord-rpc';
-import { GatewayIntentBits } from 'discord.js'
+import RPC from 'discord-rpc'; 
+
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 const scopes = ['rpc', 'rpc.api', 'messages.read'];
 const COMMANDS= [];
