@@ -1,5 +1,4 @@
-import { REST, Routes,GatewayIntentBits } from 'discord.js'
-import RPC from 'discord-rpc'; 
+import { Client,REST, Routes,GatewayIntentBits } from 'discord.js'
 import 'dotenv/config';
 import express from "express"
 import { readDirectory,getActualDirectory } from './utils.js';
@@ -39,8 +38,7 @@ app.listen(port, () => {
 	}
 })();
  
-const client = new RPC.Client({ transport: 'ipc',intents: [GatewayIntentBits.Guilds,GatewayIntentBits.GuildVoiceStates] });
-RPC.register(process.env.CLIENT_ID);
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
@@ -53,30 +51,10 @@ client.on('interactionCreate', async (interaction) => {
 	// console.log(COMMANDS_MAP)
 	if (command) await command.execute(interaction) 
 });
-async function setActivity() {
-  if (!client)  return;
-   
-	client.setActivity({
-    details: `Triste`,
-    state: 'y solo',
-    startTimestamp:new Date(),
-    largeImageKey: 'catcute',
-    largeImageText: 'UwU',
-    smallImageKey: 'catcute',
-    smallImageText: 'Fufu',
-    instance: false,
-  });
-}
 
 client.on('ready', () => {
   console.log('Logged in as', client.application.name);
   console.log('Authed for user', client.user.username);
-
-	setActivity();
-
-  setInterval(() => {
-    setActivity();
-  }, 15e3);
 });
 
 // Log in to RPC with client id
