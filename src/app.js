@@ -1,13 +1,15 @@
 import { REST, Routes,GatewayIntentBits } from 'discord.js'
-import 'dotenv/config';
-import { readDirectory,getActualDirectory } from './utils.js';
 import RPC from 'discord-rpc'; 
+import 'dotenv/config';
+import express from "express"
+import { readDirectory,getActualDirectory } from './utils.js';
 
+const app = express()
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 const scopes = ['rpc', 'rpc.api', 'messages.read'];
 const COMMANDS= [];
 let COMMANDS_MAP= {};
-
+app.get("/",(req,res)=> res.send("!!!"))
 (async () => { 
 	const fileNames = await readDirectory({path:`${getActualDirectory()}/commands`,options:{withFileTypes:false}}); 
 	// console.log({fileNames})
